@@ -1,4 +1,4 @@
-const game = new Phaser.Game(1024, 768, Phaser.AUTO, '',
+const game = new Phaser.Game(1280, 720, Phaser.AUTO, '',
 { preload: preload, create: create ,update: update });
 
 let platforms
