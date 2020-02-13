@@ -27,73 +27,58 @@ function preload() {
 
 function create() {
   game.add.sprite(0,0,'bg')
-  //add game physics
-    game.physics.startSystem(Phaser.Physics.P2JS)
-    var platformsCollison = game.physics.p2.createCollisionGroup()
-    game.physics.p2.updateBoundsCollisionGroup()
+  game.physics.startSystem(Phaser.Physics.P2JS);
 
-    platforms = game.add.group()
-    platforms.enableBody = true
-    game.physics.p2.gravity.y = 8600;
+  game.physics.p2.gravity.y = 9350;
+  game.physics.p2.world.defaultContactMaterial.friction = 0.3;
+  game.physics.p2.world.setGlobalStiffness(1e5);
 
-    
-    //add background
-    
-
-     mentega = platforms.create(900,350,'mentega')
-    //make mentega body can't be moved
-    mentega.body.immovable = true
   
-     mentega1 = platforms.create(810,440,'mentega1')
-    mentega1.body.immovable = true
+  player = game.add.sprite(200, 00, 'char');
+  game.physics.p2.enable(player);
+  player.body.clearShapes();
+	player.body.loadPolygon('sprite_physics', 'char');
+  player.body.collideWorldBounds = true;
+  player.body.fixedRotation = true;
+  player.body.damping = 0.5;
+
+
+  var spriteMaterial = game.physics.p2.createMaterial('spriteMaterial', player.body);
+  var worldMaterial = game.physics.p2.createMaterial('worldMaterial');
+  var boxMaterial = game.physics.p2.createMaterial('worldMaterial');
+
+  game.physics.p2.setWorldMaterial(worldMaterial, true, true, true, true);
+
+  kompor2 = game.add.sprite(450,550,'kompor2')
+  game.physics.p2.enable(kompor2)
+  kompor2.body.clearShapes()
+  kompor2.body.loadPolygon('sprite_physics','kompor2')
+  kompor2.body.kinematic = true;
+  kompor2.body.mass = 6;
+  kompor2.body.setMaterial(boxMaterial);
+
+
+  var groundPlayerCM = game.physics.p2.createContactMaterial(spriteMaterial, worldMaterial, { friction: 0.0 });
+  var groundBoxesCM = game.physics.p2.createContactMaterial(worldMaterial, boxMaterial, { friction: 0.6 });
+
+
+  kompor = game.add.sprite(515,670,'kompor')
+  game.physics.p2.enable(kompor)
+  kompor.body.clearShapes()
+  kompor.body.loadPolygon('sprite_physics','kompor')
+  kompor.body.mass = 6;
+  kompor.body.setMaterial(boxMaterial);
+  kompor.body.kinematic = true;
+
+  //player.body.gravity.y = 800
   
-     kompor = platforms.create(0,555,'kompor')
-    kompor.body.immovable = true
-  
-     kompor1 = platforms.create(215,500,'kompor1')
-    kompor1.body.immovable = true
-  
-     kompor2 = platforms.create(150,525,'kompor2')
-    kompor2.body.immovable = true
-    // mentega = game.add.sprite(100,100,'mentega')
-    // kompor = game.add.sprite(0,500,'kompor')
-
-   
-    // // game.physics.arcade.enable(kompor)
-    // // kompor.enableBody = true
-    // // kompor.body.immovable = true
 
 
-    
-    // // game.physics.arcade.enable(fin)
-    // // fin.enableBody = true
-    // // fin.body.immovable = true
-
-
-    player = game.add.sprite(100,500,'char')
-    game.physics.p2.enable(player)
-    player.body.setZeroDamping();
-	  player.body.fixedRotation = true
-    // player.body.bounce.y = 0.1
-    // player.body.gravity.y = 800
-    // player.body.collideWorldBounds = true
-
-    cursors = game.input.keyboard.createCursorKeys();
-
-
-
-
+  cursors = game.input.keyboard.createCursorKeys();
 }
 
 function update() {
-      // game.physics.arcade.collide(player, platforms)
-      // game.physics.arcade.collide(player, kompor)
 
-      // game.physics.arcade.collide(player, platforms3, reload, null, this)
-      // game.physics.arcade.collide(player, spon, drop, null,this)
-//      game.physics.arcade.collide(player, fin, nextStage, null, this);
-
-      // player.body.velocity.x = 1
       player.body.setZeroVelocity();
       if (cursors.left.isDown)
       {
@@ -106,13 +91,10 @@ function update() {
 
       if (cursors.up.isDown)
       {
-        player.body.moveUp(400);
+        player.body.moveUp(1000);
       }
-      else if (cursors.down.isDown)
-      {
-        player.body.moveDown(400);
-      }
-
+      
+      
 
 }
 //
