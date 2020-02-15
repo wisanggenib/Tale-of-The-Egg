@@ -70,6 +70,64 @@ function create() {
   kompor.body.setMaterial(boxMaterial);
   kompor.body.kinematic = true;
 
+
+  mentega = game.add.sprite(980,390,'mentega')
+  game.physics.p2.enable(mentega)
+  mentega.body.clearShapes()
+  mentega.body.loadPolygon('sprite_physics','mentega')
+  mentega.body.mass = 6;
+  mentega.body.setMaterial(boxMaterial);
+  mentega.body.kinematic = true;
+
+  mentega1 = game.add.sprite(950,500,'mentega1')
+  game.physics.p2.enable(mentega1)
+  mentega1.body.clearShapes()
+  mentega1.body.loadPolygon('sprite_physics','mentega1')
+  mentega1.body.mass = 6;
+  mentega1.body.setMaterial(boxMaterial);
+  mentega1.body.kinematic = true;
+
+  mentega1 = game.add.sprite(950,500,'mentega1')
+  game.physics.p2.enable(mentega1)
+  mentega1.body.clearShapes()
+  mentega1.body.loadPolygon('sprite_physics','mentega1')
+  mentega1.body.mass = 6;
+  mentega1.body.setMaterial(boxMaterial);
+  mentega1.body.kinematic = true;
+
+  var api4 = game.add.sprite(550,505,'api')
+  game.physics.p2.enable(api4)
+  api4.body.clearShapes()
+  api4.body.loadPolygon('sprite_physics','api')
+  api4.body.mass = 6
+  api4.body.setMaterial(boxMaterial)
+  api4.body.kinematic = true
+
+  var api3 = game.add.sprite(500,505,'api')
+  game.physics.p2.enable(api3)
+  api3.body.clearShapes()
+  api3.body.loadPolygon('sprite_physics','api')
+  api3.body.mass = 6
+  api3.body.setMaterial(boxMaterial)
+  api3.body.kinematic = true
+
+  var api2 = game.add.sprite(350,505,'api')
+  game.physics.p2.enable(api2)
+  api2.body.clearShapes()
+  api2.body.loadPolygon('sprite_physics','api')
+  api2.body.mass = 6
+  api2.body.setMaterial(boxMaterial)
+  api2.body.kinematic = true
+
+  var api = game.add.sprite(300,505,'api')
+  game.physics.p2.enable(api)
+  api.body.clearShapes()
+  api.body.loadPolygon('sprite_physics','api')
+  api.body.mass = 6
+  api.body.setMaterial(boxMaterial)
+  api.body.kinematic = true
+  
+  
   //player.body.gravity.y = 800
   
 
@@ -131,5 +189,28 @@ function removePicture(fire) {
 
     // game.time.events.add(4000, this.showPicture, this, pic);
      game.time.events.add(game.rnd.between(1000, 3000), this.showPicture, this, fire);
+
+}
+
+function showPicture(fire) {
+
+  //when showPicture called, make fire show in the game and body is enabled.
+  fire.visible = true
+  fire.body.enable = true
+
+  // game.time.events.add(2000, this.removePicture, this, pic);
+  //make randomtime to call funtion remove picture.
+  game.time.events.add(game.rnd.between(1000, 3000), this.removePicture, this, fire);
+
+}
+
+function removePicture(fire) {
+
+
+  fire.visible = false
+  fire.body.enable = false
+
+  // game.time.events.add(4000, this.showPicture, this, pic);
+   game.time.events.add(game.rnd.between(1000, 3000), this.showPicture, this, fire);
 
 }
