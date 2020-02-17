@@ -16,7 +16,8 @@ function preload() {
   game.load.image('segitiga','assets/segitiga.png')
   game.load.image('plima','assets/segilima.png')
   game.load.image('api','assets/stage7/api.png')
-  game.load.physics('sprite_physics','assets/stage7/p2_physics2_try.json')
+//   game.load.physics('sprite_physics','assets/stage7/p2_physics2_try.json')
+game.load.physics('sprite_physics','assets/stage7/p2_physics.json')
 
   //inserting asset position of finish
 }
@@ -25,7 +26,7 @@ function preload() {
 function create() {
     game.stage.backgroundColor = "#000000";
   //add game physics
-    game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.startSystem(Phaser.Physics.P2JS);
 
     // lingkaran = game.add.sprite(100, 200, 'lingkaran');
      //plima = game.add.sprite(100, 200, 'plima');
@@ -34,9 +35,13 @@ function create() {
 	 char = game.add.sprite(550, 200, 'char');
 	 api = game.add.sprite(300, 400, 'api');
 
-    game.physics.arcade.enable(char);
-    game.physics.arcade.enable(api);
-    game.input.onDown.add(toggle, this);
+     game.physics.p2.enable([ char, api ], true);
+     char.body.clearShapes();
+	 char.body.loadPolygon('sprite_physics', 'char');
+
+	 api.body.clearShapes();
+	 api.body.loadPolygon('sprite_physics', 'api');
+    
     
 }
 

@@ -127,7 +127,22 @@ function create() {
   api.body.setMaterial(boxMaterial)
   api.body.kinematic = true
   
-  
+  var fire = [ api, api2, api3, api4 ];
+  var i = 0;
+
+  //funtion that give event to every singgle value in array
+  fire.forEach(
+    function(fire) {
+
+
+                     fire.visible = false;
+                     //make random time to call showPicture function.
+                     game.time.events.add(1000 + (i * 500), this.showPicture, this, fire);
+                     i++;
+                     
+                    }
+              );
+
   //player.body.gravity.y = 800
   
 
